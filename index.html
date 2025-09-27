@@ -339,22 +339,59 @@
         .product-image {
             flex: 1;
             min-height: 400px;
+            aspect-ratio: 5/4;
             background: #e9ecef;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--gray);
             font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
         }
-        .product-image img {
+        .product-slider {
             width: 100%;
             height: 100%;
-            max-width: 100%;
-            max-height: 100%;
+            min-height: 320px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.7s cubic-bezier(.4,0,.2,1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        .product-slide img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             border-radius: 8px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.08);
         }
+        @media (max-width: 700px) {
+            .product-image {
+                min-height: 180px;
+                aspect-ratio: 1/1;
+            }
+            .product-slider {
+                min-height: 180px;
+            }
+        }
+        
+
         
         .product-details {
             flex: 1;
@@ -613,7 +650,16 @@
             
             <div class="product-showcase">
                 <div class="product-image">
-                   <img src="98bdc2f9-f455-47fc-8851-92dabd113ff3.jpg">
+                <div class="product-slider">
+                    <div class="product-slide active"><img src="98bdc2f9-f455-47fc-8851-92dabd113ff3.jpg" alt="Product 1"></div>
+                    <div class="product-slide"><img src="1f5f95bc-46ce-4a24-b9bc-247fc31e120c.jpg" alt="Product 2"></div>
+                    <div class="product-slide"><img src="78338dae-9bbc-478f-9b72-1d04f93a4b8d.jpg" alt="Product 3"></div>
+                    <div class="product-slide"><img src="2b2d0b4f-87ff-4716-9762-85eb70336ba9.jpg" alt="Product 4"></div>
+                    <div class="product-slide"><img src="08e14a0e-b56c-4fe1-9d8f-9a944f154d6c.jpg" alt="Product 5"></div>
+                    <div class="product-slide"><img src="2567517a-c899-4f10-9991-74aec19e7b48.jpg" alt="Product 6"></div>
+                    <div class="product-slide"><img src="667b7e21-88b8-4324-b3e2-bd4c678f2a60.jpg" alt="Product 7"></div>
+                    <div class="product-slide"><img src="7373c1e5-8395-40f3-abdd-2521d7f5da3d.jpg" alt="Product 8"></div>
+                </div>
                 </div>
                 
                 <div class="product-details">
@@ -718,6 +764,20 @@
     </footer>
 
     <script>
+        // Product image slider
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.product-slide');
+            let current = 0;
+            function showSlide(idx) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === idx);
+                });
+            }
+            setInterval(() => {
+                current = (current + 1) % slides.length;
+                showSlide(current);
+            }, 3000);
+        });
         // Improved JavaScript for mobile menu
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenu = document.querySelector('.mobile-menu');
