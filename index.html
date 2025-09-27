@@ -102,6 +102,8 @@
             justify-content: space-between;
             padding: 15px 0;
             gap: 24px;
+            flex-wrap: nowrap;
+            min-width: 0;
         }
 
         .logo-block {
@@ -140,6 +142,10 @@
         }
         .mobile-menu {
             margin-left: auto;
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 2100;
         }
 
         
@@ -193,12 +199,25 @@
                 display: block;
             }
             .mobile-menu {
-                display: flex;
+                display: flex !important;
                 align-items: center;
                 font-size: 2rem;
                 color: var(--primary);
                 cursor: pointer;
-                margin-left: 16px;
+                margin-left: 8px;
+                margin-right: 0;
+                z-index: 2100;
+                flex-shrink: 0;
+            }
+            .header-container {
+                gap: 8px;
+            }
+            .logo-block {
+                min-width: 0;
+                flex-shrink: 1;
+            }
+            nav {
+                flex-shrink: 1;
             }
         }
         
